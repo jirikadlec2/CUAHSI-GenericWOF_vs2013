@@ -41,12 +41,14 @@ namespace WaterOneFlow.odws
         public ODService(HttpContext aContext)
         {
 
-            log.Debug("Starting " + System.Configuration.ConfigurationManager.AppSettings["network"]);
+            //log.Debug("Starting " + System.Configuration.ConfigurationManager.AppSettings["network"]);
             appContext = aContext;
             // This is now done in the global.asax file
             // this got cached, which cause the name to be localhost
-            serviceName = ConfigurationManager.AppSettings["GetValuesName"];
-            Boolean odValues = Boolean.Parse(ConfigurationManager.AppSettings["UseODForValues"]);
+            //serviceName = ConfigurationManager.AppSettings["GetValuesName"];
+            serviceName = "MYSERVICE";
+            //Boolean odValues = Boolean.Parse(ConfigurationManager.AppSettings["UseODForValues"]);
+            Boolean odValues = true;
             if (odValues)
             {
                 string Port = aContext.Request.ServerVariables["SERVER_PORT"];
@@ -69,12 +71,13 @@ namespace WaterOneFlow.odws
                 serviceUrl = Protocol + aContext.Request.ServerVariables["SERVER_NAME"] +
                                             Port +
                                             aContext.Request.ApplicationPath
-                                            + "/" + ConfigurationManager.AppSettings["asmxPage"];
+                                            + "/" + "cuahsi_1_1.asmx";
 
             }
             else
             {
-                serviceUrl = ConfigurationManager.AppSettings["externalGetValuesService"];
+                //serviceUrl = ConfigurationManager.AppSettings["externalGetValuesService"];
+                serviceUrl = "http://example.com";
             }
 
  

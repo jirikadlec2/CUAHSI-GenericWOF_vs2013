@@ -25,17 +25,7 @@ namespace WaterOneFlow.odws
         void Application_Start(object sender, EventArgs e)
         {
 
-            //Authetication code
-            WaterOneFlowGatekeeperSection sect = (WaterOneFlowGatekeeperSection)ConfigurationManager.GetSection("wateroneflowAuthentication");
-            Assembly AuthAssembly = Assembly.Load(sect.GatekeeperClassSection.GatekeeperAssembely);
-            Type[] types = AuthAssembly.GetTypes();
-            Type type = AuthAssembly.GetType(sect.GatekeeperClassSection.GatekeeperClass, true);
-            WaterAuth = (WofAuthenticationImpl)
-                       Activator.CreateInstance(type, true);
-            // BindingFlags.ExactBinding,null,
-            //new  Object[] {sect},null,null);
-            WaterAuth.GatekeeperPropertiesSection = sect;
-            WaterAuth.TestConfiguration();
+
 
 
             // Code that runs on application startup
@@ -149,7 +139,8 @@ namespace WaterOneFlow.odws
             // Code that runs when a new session is started
             String serviceName = ConfigurationManager.AppSettings["GetValuesName"];
             String serviceUrl;
-            Boolean odValues = Boolean.Parse(ConfigurationManager.AppSettings["UseODForValues"]);
+            // Boolean odValues = Boolean.Parse(ConfigurationManager.AppSettings["UseODForValues"]);
+            Boolean odValues = true;
             if (odValues)
             {
                 string Port = Context.Request.ServerVariables["SERVER_PORT"];

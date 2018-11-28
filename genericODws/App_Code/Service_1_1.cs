@@ -67,7 +67,8 @@ namespace WaterOneFlow.odws
 
                 try
                 {
-                    useODForValues = Boolean.Parse(ConfigurationManager.AppSettings["UseODForValues"]);
+                    useODForValues = true;
+                    //useODForValues = Boolean.Parse(ConfigurationManager.AppSettings["UseODForValues"]);
                 }
                 catch (Exception e)
                 {
@@ -80,7 +81,8 @@ namespace WaterOneFlow.odws
 
                 try
                 {
-                    requireAuthToken = Boolean.Parse(ConfigurationManager.AppSettings["requireAuthToken"]);
+                    // requireAuthToken = Boolean.Parse(ConfigurationManager.AppSettings["requireAuthToken"]);
+                    requireAuthToken = false;
                 }
                 catch (Exception e)
                 {
@@ -120,7 +122,7 @@ namespace WaterOneFlow.odws
  
             public SiteInfoResponseType GetSitesObject(string[] site, String authToken)
             {
-                GlobalClass.WaterAuth.SitesServiceAllowed(Context, authToken);
+                //GlobalClass.WaterAuth.SitesServiceAllowed(Context, authToken);
                 
                 try
                 {
@@ -136,7 +138,7 @@ namespace WaterOneFlow.odws
 
             public virtual SiteInfoResponseType GetSiteInfoObject(string site, String authToken)
             {
-                GlobalClass.WaterAuth.SiteInfoServiceAllowed(Context, authToken);
+                //GlobalClass.WaterAuth.SiteInfoServiceAllowed(Context, authToken);
                 
                 try
                 {
@@ -154,7 +156,7 @@ namespace WaterOneFlow.odws
 
             public VariablesResponseType GetVariableInfoObject(string variable, String authToken)
             {
-                GlobalClass.WaterAuth.VariableInfoServiceAllowed(Context, authToken);
+                //GlobalClass.WaterAuth.VariableInfoServiceAllowed(Context, authToken);
                 
                 try
                 {
@@ -177,7 +179,7 @@ namespace WaterOneFlow.odws
 
             public virtual TimeSeriesResponseType GetValuesObject( string location, string variable, string startDate,  string endDate, String authToken)
             {
-                GlobalClass.WaterAuth.DataValuesServiceAllowed(Context, authToken);
+                //GlobalClass.WaterAuth.DataValuesServiceAllowed(Context, authToken);
                 
                 if (!useODForValues) throw new SoapException("GetValues implemented external to this service. Call GetSiteInfo, and SeriesCatalog includes the service Wsdl for GetValues. Attribute:serviceWsdl on Element:seriesCatalog XPath://seriesCatalog/[@serviceWsdl]", new XmlQualifiedName("ServiceException"));
 
@@ -197,7 +199,7 @@ namespace WaterOneFlow.odws
 
             public SiteInfoResponseType GetSiteInfoMultpleObject(string[] site, string authToken)
             {
-                GlobalClass.WaterAuth.SiteInfoServiceAllowed(Context, authToken);
+                //GlobalClass.WaterAuth.SiteInfoServiceAllowed(Context, authToken);
 
                 try
                 {
@@ -213,13 +215,13 @@ namespace WaterOneFlow.odws
 
             public SiteInfoResponseType GetSitesByBoxObject(float west, float south, float east, float north, bool IncludeSeries, string authToken)
             {
-                GlobalClass.WaterAuth.SiteInfoServiceAllowed(Context, authToken);
+                //GlobalClass.WaterAuth.SiteInfoServiceAllowed(Context, authToken);
                return ODws.GetSitesInBox( west,south,east, north, IncludeSeries );
             }
 
             public TimeSeriesResponseType GetValuesForASiteObject(string site, string StartDate, string EndDate, string authToken)
             {
-                GlobalClass.WaterAuth.DataValuesServiceAllowed(Context, authToken); 
+                //GlobalClass.WaterAuth.DataValuesServiceAllowed(Context, authToken); 
                 return ODws.GetValuesForASite(site, StartDate, EndDate);
             }
 
